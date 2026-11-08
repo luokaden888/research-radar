@@ -20,7 +20,9 @@ def build_query(keywords):
     for k in keywords:
         parts.append(f'ti:"{k}"')
         parts.append(f'abs:"{k}"')
-    return " OR ".join(parts)
+        keyword_part = " OR ".join(parts)
+    category_part = "cat:q-bio.BM OR cat:q-bio.QM OR cat:q-bio.GN OR cat:physics.chem-ph"
+    return f"({keyword_part}) AND ({category_part})"
 
 
 def clean(text):
