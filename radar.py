@@ -7,7 +7,11 @@ from biorxiv_source import fetch_biorxiv
 from config import BIORXIV_CATEGORIES, DAYS_BACK, KEYWORDS, MAX_ARXIV
 
 
-def main():
+def collect_papers():
+    """Pull from every source and return one list, newest first.
+
+    Split out from main() so other files (like summarize.py) can reuse it.
+    """
     papers = []
 
     # Each source is wrapped in try/except so one broken source
@@ -28,12 +32,14 @@ def main():
 
     # Newest first. Dates are "YYYY-MM-DD" strings, which sort correctly as text.
     papers.sort(key=lambda p: p["date"], reverse=True)
+    return papers
 
+
+def main():
+    papers = collect_papers()
     print(f"\nTotal: {len(papers)} papers\n")
     for i, p in enumerate(papers, 1):
         print(f"{i:2}. [{p['source']:7}] [{p['date']}] {p['title']}")
-
-    return papers
 
 
 if __name__ == "__main__":

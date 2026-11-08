@@ -29,3 +29,7 @@ DAYS_BACK = 2
 
 # How many of the newest matching arXiv papers to grab.
 MAX_ARXIV = 50
+
+# Which Gemini model writes the summaries. "flash-lite" is the fastest and
+# cheapest tier; "-latest" means it auto-upgrades when Google releases a new one.
+GEMINI_MODEL = "gemini-flash-lite-latest"
